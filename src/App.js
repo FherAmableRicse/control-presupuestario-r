@@ -9,7 +9,7 @@ function App() {
     slogan: 'Tu dinero es nuestra preocupacion'
   };
   const currenDateYear = new Date().getFullYear();
-  const author = 'Fher Amable Ricse';
+  const author = 'Fher Amable';
 
   console.log(currenDateYear)
   console.log(author)
