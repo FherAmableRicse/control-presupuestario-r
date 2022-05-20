@@ -1,8 +1,11 @@
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BudgetForm from './components/BudgetForm';
+import BudgetSummary from './components/BudgetSummary';
+import BudgetExpenseForm from './components/BudgetExpenseForm';
+import BudgetExpenses from './components/BudgetExpenses';
 
 function App() {
   const company = {
@@ -14,7 +17,21 @@ function App() {
   const author = 'ELGS';
 
   const [budget, setBudget] = useState(0);
+  const [remaining, setRemaining] = useState(0);
   const [budgetForm, setBudgetForm] = useState(true);
+  const [expense, setExpense] = useState({});
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    if (expense.value) {
+      setExpenses([
+        ...expenses,
+        expense
+      ]);
+      setRemaining(remaining - expense.value);
+      setExpense({});
+    }
+  }, [expense]);
 
   return (
     <>
@@ -24,20 +41,36 @@ function App() {
       <main className="main">
         <section className="budget">
           <div className="budget__container">
-            <h2>Presupuesto</h2>
-            {
-              budgetForm ?
-                (
-                  <BudgetForm
-                    setBudget={setBudget}
-                    setBudgetForm={setBudgetForm}
-                  />
-                )
-                :
-                (
-                  <h2>{budget}</h2>
-                )
-            }
+            <div className="budget__budget">
+              {
+                budgetForm ?
+                  (
+                    <div className="budget__budget-card">
+                      <h2 className="budget__title">💰 Presupuesto 💰</h2>
+                      <BudgetForm
+                        setBudget={setBudget}
+                        setRemaining={setRemaining}
+                        setBudgetForm={setBudgetForm}
+                      />
+                    </div>
+                  )
+                  :
+                  (
+                    <>
+                      <BudgetExpenseForm
+                        setExpense={setExpense}
+                      />
+                      <BudgetSummary
+                        budget={budget}
+                        remaining={remaining}
+                      />
+                      <BudgetExpenses
+                        expenses={expenses}
+                      />
+                    </>
+                  )
+              }
+            </div>
           </div>
         </section>
       </main>
