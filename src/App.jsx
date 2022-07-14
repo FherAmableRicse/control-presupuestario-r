@@ -10,7 +10,7 @@ import BudgetExpenses from './components/BudgetExpenses';
 function App() {
   const company = {
     name: '💸Control Presupuestario💸',
-    slogan: 'Tu dinero es nuestra preocupacion'
+    slogan: 'Tu dinero es nuestra preocupación'
   };
 
   const currentDateYear = new Date().getFullYear();
