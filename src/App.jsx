@@ -14,7 +14,7 @@ function App() {
   };
 
   const currentDateYear = new Date().getFullYear();
-  const author = 'ELGS';
+  const author = 'Fher Amable';
 
   const [budget, setBudget] = useState(0);
   const [remaining, setRemaining] = useState(0);
